@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back to Nature | Fencing & Landscaping</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/path/to/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/path/to/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/path/to/apple-touch-icon.png">
+    <link rel="manifest" href="/path/to/site.webmanifest">
+    <link rel="icon" type="image/x-icon" href="/api/placeholder/32/32">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+       :root {
+    --primary: #073702; /* Vibrant green */
+    --secondary: #6c757d; /* Soft gray */
+    --accent: #ffc107; /* Warm yellow */
+    --light: #f8f9fa; /* Light background */
+    --dark: #073702; /* Dark green */
+    --text: #212529; /* Dark text for contrast */
+            }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: 'Merriweather', serif;
+}
+
+        .offerings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .offering-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .offering-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .offering-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .offering-content {
+            padding: 2rem;
+        }
+
+        .offering-content h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .offering-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .offering-content li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .offering-content li::before {
+            content: '•';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+
+        .price-range {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .gallery {
+            padding: 8rem 2rem;
+            background: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-image {
+    transform: scale(1.1);
+    filter: brightness(0.8);
+}
+
+.gallery-caption {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+    transform: translateY(0);
+}
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+    animation: fadeOut 3s forwards; /* Animation to fade out after 3 seconds */
+}
+
+.loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    90% { opacity: 1; } /* Stay visible for 90% of the animation */
+    100% { opacity: 0; visibility: hidden; } /* Fade out and hide */
+}
+
+#loading-screen p {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    color: var(--text);
+}
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .offerings-grid,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Navigation */
+        nav {
+    background: linear-gradient(135deg, #073702,#073702, #073702); /* Darker green gradient */
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-image {
+    width: 80px; /* Adjust the size as needed */
+    height: 100%;
+    margin-right: 10px;
+    vertical-align: center;
+}
+
+.logo i {
+    color: #ffc107; /* Accent color for the leaf icon */
+}
+
+.nav-links a {
+    color: #f8f9fa; /* Light text color */
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 1.1rem;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #ffc107; /* Accent color for underline */
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+        /* Hero Section */
+        .hero {
+    height: 100vh;
+    background-image:  url(Images/MainPicture.jpg);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: Center;
+    justify-content: center;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    padding: 1rem;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(transparent, var(--light));
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content p {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1.2rem 2.5rem;
+    background: #ffc107; /* Accent color */
+    color: #000000; /* Dark green text */
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    background: #ffb300; /* Slightly darker accent color */
+}
+/* About Us Section */
+#about {
+    background-color: #f9f9f9; /* Light background to make it stand out */
+    padding: 40px 20px; /* Padding for spacing */
+    text-align: center; /* Center-align the text */
+}
+.about::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+            margin: 1rem auto;
+        }
+
+#about h2 {
+    color: #073702; /* Green color for the heading */
+    font-size: 2em; /* Larger font size for emphasis */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+
+#about p {
+    font-size: 1.1em; /* Slightly larger font size for readability */
+    line-height: 1.8; /* Increased line height for better readability */
+    max-width: 800px; /* Limit the width for better readability */
+    margin: 0 auto; /* Center the paragraph */
+    color: #555; /* Slightly darker text color */
+}
+        /* Services Section */
+        .services {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--primary);
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+            margin: 1rem auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .service-card, .offering-item {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover, .offering-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .testimonials {
+    padding: 8rem 2rem;
+    background: var(--light);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-content p {
+    font-size: 1.1rem;
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.author-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.author-details h4 {
+    font-size: 1.2rem;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+.author-details p {
+    font-size: 0.9rem;
+    color: var(--secondary);
+}
+
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+}
+        /* Contact Form */
+        .contact {
+            background: white;
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: linear-gradient(45deg, transparent 33.33%, white 33.33%, white 66.66%, transparent 66.66%);
+            background-size: 30px 50px;
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--light);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(46, 90, 53, 0.1);
+        }
+
+        .form-group textarea {
+            height: 180px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: linear-gradient(45deg, transparent 33.33%, var(--dark) 33.33%, var(--dark) 66.66%, transparent 66.66%);
+            background-size: 30px 50px;
+        }
+        .footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 2rem;
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+}
+        /* Mobile Navigation */
+        .menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    color: #f8f9fa; /* Light text color */
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #28a745; /* Solid green for mobile menu */
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
+.hero-content h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero-content p {
+        font-size: 1.2rem;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #28a745; /* Solid green for mobile menu */
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+        
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.6s ease-out;
+}
+footer {
+    background: linear-gradient(135deg, #2e8b57, #3cb371); /* Lighter green gradient */
+    color: #f8f9fa; /* Light text color */
+    padding: 6rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-links a:hover {
+    color: var(--accent);
+}@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.testimonial-card {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.testimonial-card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.testimonial-card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.testimonial-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+    </style>
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="loading-spinner"></div>
+        <p>Loading...</p>
+    </div>
+    <nav>
+        <div class="nav-content">
+            <div class="logo">
+                <img src="Images/Logo.png" alt="Back to Nature Logo" class="logo-image">
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <div class="dropdown">
+                    <a href="#services" class="dropbtn">Services <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#services">Natural Fencing</a>
+                        <a href="#services">Landscape Design</a>
+                        <a href="#services">Eco-Friendly Gardens</a>
+                    </div>
+                </div>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <P>.</P>
+            <P>.<P>
+            <h1>Return to Natural Beauty</h1>
+            <p>Creating harmonious outdoor spaces through expert fencing and landscaping</p>
+            <a href="#contact" class="cta-button">Start Your Transformation</a>
+        </div>
+    </section>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>At Back to Nature, we are dedicated to bringing nature back to your outdoor spaces. With years of experience in fencing and landscaping, we provide high-quality services tailored to your needs. Our mission is to create beautiful, functional, and sustainable outdoor environments for our clients.</p>
+    </section>
+    <section id="services" class="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-fence"></i>
+                </div>
+                <h3>Natural Fencing</h3>
+                <p>Custom fence designs that blend seamlessly with your landscape, using sustainable materials and expert craftsmanship to create beautiful boundaries.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-tree"></i>
+                </div>
+                <h3>Landscape Design</h3>
+                <p>Transform your outdoor space with our comprehensive landscape design services, incorporating native plants and sustainable practices.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>Eco-Friendly Gardens</h3>
+                <p>Create thriving garden ecosystems that support local wildlife and reduce water usage while maintaining stunning natural beauty.</p>
+            </div>
+        </div>
+    </section>
+    <section id="offerings" class="offerings">
+        <h2 class="section-title">Our Offerings</h2>
+        <div class="offerings-grid">
+            <div class="offering-item">
+                <img src="Images/Customfencing.jpg" alt="Custom Fencing" class="offering-image">
+                <div class="offering-content">
+                    <h3>Custom Fencing Solutions</h3>
+                    <ul>
+                        <li>Privacy Fencing</li>
+                        <li>Decorative Garden Fencing</li>
+                        <li>Natural Wood Options</li>
+                        <li>Security Barriers</li>
+                        <li>Gate Installation</li>
+                    </ul>
+                    <div class="price-range">
+                        Starting from $2,500
+                    </div>
+                </div>
+            </div>
+
+            <div class="offering-item">
+                <img src="Images/Landscapedesign.jpg" alt="Landscape Design" class="offering-image">
+                <div class="offering-content">
+                    <h3>Landscape Design</h3>
+                    <ul>
+                        <li>Custom Garden Planning</li>
+                        <li>Native Plant Selection</li>
+                        <li>Drought-Resistant Design</li>
+                        <li>Seasonal Color Planning</li>
+                        <li>Sustainable Solutions</li>
+                    </ul>
+                    <div class="price-range">
+                        Starting from $3,500
+                    </div>
+                </div>
+            </div>
+
+            <div class="offering-item">
+                <img src="Images/hardscaping.jpeg" alt="Hardscaping" class="offering-image">
+                <div class="offering-content">
+                    <h3>Hardscaping Elements</h3>
+                    <ul>
+                        <li>Stone Pathways</li>
+                        <li>Retaining Walls</li>
+                        <li>Patio Design</li>
+                        <li>Water Features</li>
+                        <li>Outdoor Living Spaces</li>
+                    </ul>
+                    <div class="price-range">
+                        Starting from $5,000
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <h2 class="section-title">Our Work</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="Images/ModernPrivacyFence.jpg" alt="Modern Fence Design" class="gallery-image">
+                <div class="gallery-caption">Modern Privacy Fence Installation</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Images/nativegarden.jpeg" alt="Native Garden" class="gallery-image">
+                <div class="gallery-caption">Native Plant Garden Design</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Images/stonepath.jpeg" alt="Stone Pathway" class="gallery-image">
+                <div class="gallery-caption">Natural Stone Pathway</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Images/Customfencing.jpg" alt="Water Feature" class="gallery-image">
+                <div class="gallery-caption">Custom Water Feature</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Images/gardenfencing.jpg" alt="Garden Fence" class="gallery-image">
+                <div class="gallery-caption">Decorative Garden Fencing</div>
+            </div>
+            <div class="gallery-item">
+                <img src="Images/Patio.jpeg" alt="Patio Design" class="gallery-image">
+                <div class="gallery-caption">Custom Patio Design</div>
+                
+            </div>
+        </div>
+    </section>
+    <section id="testimonials" class="testimonials">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"Back to Nature transformed our backyard into a paradise! Their attention to detail and eco-friendly approach is unmatched. Highly recommend!"</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="Images/A1.jpg" alt="Client 1" class="author-image">
+                    <div class="author-details">
+                        <h4>John Doe</h4>
+                        <p>Homeowner, Green Valley</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"The team was professional and creative. Our new fence and garden look stunning. Thank you for making our outdoor space so beautiful!"</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="Images/A1.jpg" alt="Client 2" class="author-image">
+                    <div class="author-details">
+                        <h4>Jane Smith</h4>
+                        <p>Business Owner, Green Valley</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"From design to execution, everything was seamless. We love our new patio and stone pathways. Great job, Back to Nature! Thank"</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="Images/A1.jpg" alt="Client 3" class="author-image">
+                    <div class="author-details">
+                        <h4>Michael Brown</h4>
+                        <p>Homeowner, Green Valley</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="contact">
+        <h2 class="section-title">Get in Touch</h2>
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Tell Us About Your Project</label>
+                <textarea id="message" required></textarea>
+            </div>
+            <button type="submit" class="cta-button">Send Message</button>
+        </form>
+    </section>
+
+
+<footer>
+    <style>
+        footer {
+    background: linear-gradient(135deg, var(--dark), var(--primary));
+    color: white;
+    padding: 6rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+footer::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%231e7e34" fill-opacity="1" d="M0,160L48,149.3C96,139,192,117,288,128C384,139,480,181,576,181.3C672,181,768,139,864,128C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>');
+    background-size: cover;
+    background-position: center;
+}
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+    color: #e0f2e9; /* Light green for headings */
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.footer-links a {
+    color: #f8f9fa; /* Light text for links */
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: #ffc107; /* Accent color for hover */
+    transform: translateX(5px);
+}
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            color: var(--accent);
+        }
+
+        .social-links a {
+    color: #f8f9fa; /* Light text */
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+}
+
+.social-links a:hover {
+    color: #ffc107; /* Accent color */
+    background: rgba(255, 255, 255, 0.2); /* Slightly darker background */
+    transform: translateY(-3px);
+}
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Light border */
+    margin-top: 2rem;
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.8); /* Light text */
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+}
+
+.footer-bottom a {
+    color: rgba(255, 255, 255, 0.8); /* Light text for links */
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom a:hover {
+    color: #ffc107; /* Accent color for hover */
+}
+
+        .awards {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .award-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffc107; /* Accent color */
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.award-item:hover {
+    transform: translateY(-5px);
+}
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-item {
+                justify-content: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .awards {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            @media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .footer-section {
+        margin-bottom: 2rem;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .awards {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+}
+        }
+        .award-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent);
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.award-item:hover {
+    transform: translateY(-5px);
+}
+#newsletter-form input {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+    color: #f8f9fa; /* Light text */
+    font-size: 1rem;
+}
+
+#newsletter-form input::placeholder {
+    color: rgba(255, 255, 255, 0.7); /* Light placeholder text */
+}
+
+#newsletter-form button {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background: #ffc107; /* Accent color */
+    color: #010e04; /* Dark green text */
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#newsletter-form button:hover {
+    background: #ffb300; /* Slightly darker accent color */
+    transform: translateY(-2px);
+}
+    </style>
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#offerings">Services</a></li>
+                <li><a href="#gallery">Portfolio</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Our Services</h3>
+            <ul class="footer-links">
+                <li><a href="#"><i class="fas fa-fence"></i> Custom Fencing</a></li>
+                <li><a href="#"><i class="fas fa-tree"></i> Landscape Design</a></li>
+                <li><a href="#"><i class="fas fa-leaf"></i> Garden Installation</a></li>
+                <li><a href="#"><i class="fas fa-water"></i> Irrigation Systems</a></li>
+                <li><a href="#"><i class="fas fa-mountain"></i> Hardscaping</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <div class="footer-contact">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>123 Nature Way, Green Valley, GV 12345</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(555) 123-4567</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@backtonature.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Mon-Sat: 8AM-6PM</span>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-houzz"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h3>Newsletter</h3>
+            <p>Subscribe to our newsletter for tips, trends, and special offers!</p>
+            <form id="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="awards">
+            <div class="award-item">
+                <i class="fas fa-award"></i>
+                <span>Best Landscape Design 2024</span>
+            </div>
+            <div class="award-item">
+                <i class="fas fa-leaf"></i>
+                <span>Eco-Friendly Business Certified</span>
+            </div>
+            <div class="award-item">
+                <i class="fas fa-star"></i>
+                <span>Top Rated Service Provider</span>
+            </div>
+        </div>
+        <p>&copy; 2025 Back to Nature. Creating harmony between homes and nature. All rights reserved.</p>
+        <p>
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a>
+        </p>
+    </div>
+</footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                navLinks.classList.remove('active');
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            contactForm.reset();
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeInUp');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .section ')
+        document.querySelectorAll('.offering-item, .gallery-item').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+</body>
